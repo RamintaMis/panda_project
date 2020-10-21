@@ -6,7 +6,7 @@ from direct.actor.Actor import Actor
 
 
 class WalkingPanda(ShowBase):
-    def __init__(self, no_rotate=False):
+    def __init__(self, no_rotate=False, scale=False, bird_view=False):
         ShowBase.__init__(self)
 
         # Load the environment model.
@@ -16,6 +16,7 @@ class WalkingPanda(ShowBase):
         # Apply scale and position transforms on the model
         self.scene.setScale(0.25, 0.25, 0.25)
         self.scene.setPos(-8, 42, 0)
+
 
         # Add the spinCameraTask procedure to the task manager.
         if no_rotate == False:
@@ -27,10 +28,24 @@ class WalkingPanda(ShowBase):
         # Load and transform the panda actor.
         self.pandaActor = Actor("models/panda-model",
                                 {"walk": "models/panda-walk4"})
-        self.pandaActor.setScale(0.005, 0.005, 0.005)
+        # Changing panda's size
+        if scale == False:
+            self.pandaActor.setScale(0.005, 0.005, 0.005)
+        else:
+            self.pandaActor.setScale(0.001, 0.001, 0.001)
+
         self.pandaActor.reparentTo(self.render)
         # Loop its animation.
         self.pandaActor.loop("walk")
+
+        # adding birds camera pos
+        if bird_view == False:
+            self.taskMgr.add(self.spinCameraTask, "SpinCameraTask")
+        else:
+
+
+
+
 
     # Define a procedure to move the camera.
     def spinCameraTask(self, task):
@@ -42,7 +57,7 @@ class WalkingPanda(ShowBase):
 
 
     def no_spinCameraTask(self, task):
-        angleDegrees = task.time *  0
+        angleDegrees = task.time * 0
         angleRadians = angleDegrees * (pi / 180.0)
         self.camera.setPos(20 * sin(angleRadians), -20.0 * cos(angleRadians), 3)
         self.camera.setHpr(angleDegrees, 0, 0)
