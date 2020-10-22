@@ -6,6 +6,7 @@ from direct.actor.Actor import Actor
 
 
 
+
 class WalkingPanda(ShowBase):
     def __init__(self, no_rotate=False, scale=False, change_color=False, disappear_panda=False, change_scenery=False):
         ShowBase.__init__(self)
@@ -50,6 +51,9 @@ class WalkingPanda(ShowBase):
         self.pandaActor.reparentTo(self.render)
         # Loop its animation.
         self.pandaActor.loop("walk")
+        mySound = base.loader.loadSfx("walking_panda/sound/sound_effect.mp3")
+        mySound.play()
+
 
 
     # Define a procedure to move the camera.
