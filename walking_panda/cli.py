@@ -11,7 +11,11 @@ def cli():
                         action="store_true")
     parser.add_argument("--scale", help="Size down the panda",
                         action="store_true")
-    parser.add_argument("--bird_view", help="Look from bird's view",
+    parser.add_argument("--change_color", help="Change Panda's color",
+                        action="store_true")
+    parser.add_argument("--disappear_panda", help="Make panda disappear",
+                        action="store_true")
+    parser.add_argument("--change_scenery", help="Change Panda's background scenery",
                         action="store_true")
 
     args = parser.parse_args()
